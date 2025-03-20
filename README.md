@@ -1,0 +1,1 @@
+先选中io_scene_valvesource目录将其添加为.zip文件，再通过Blender插件窗口安装。
