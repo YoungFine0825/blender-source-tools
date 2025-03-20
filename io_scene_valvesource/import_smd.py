@@ -277,7 +277,9 @@ class SmdImporter(bpy.types.Operator, Logger):
 				print("- Validated {} bones against armature \"{}\"{}".format(validated, smd.a.name, " (could not find {})".format(missing) if missing > 0 else ""))
 
 		if not smd.a:		
-			smd.a = self.createArmature(self.truncate_id_name((self.qc.jobName if self.qc else smd.jobName) + "_skeleton",bpy.types.Armature))
+			# smd.a = self.createArmature(self.truncate_id_name((self.qc.jobName if self.qc else smd.jobName) + "_skeleton",bpy.types.Armature))
+			#默认根骨骼节点名称为固定名称，方便在分别将网格、动画转为FBX格式再导入UE时，根节点名称不一致导致导入失败。
+			smd.a = self.createArmature(self.truncate_id_name("smd_skeleton_root",bpy.types.Armature))
 			if self.qc: self.qc.a = smd.a
 			smd.a.data.vs.implicit_zero_bone = False # Too easy to break compatibility, plus the skeleton is probably set up already
 		
